@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  customer-svc:
+    image: "customer-svc:dev"
+    container_name: "customer-svc"
+    build:
+      context: "./microservices/customer"
+    expose:
+      - "50051"
+    volumes:
+      - "./microservices/customer/src:/home/node/app/src"
+    environment:
+      GRPC_HOST: "0.0.0.0"
+      GRPC_PORT: "50051"
+    networks:
+      - "frontend"
+      - "customer"
+
+  gateway:
+    image: "gateway:dev"
+    container_name: "gateway"
+    build:
+      context: "./gateway"
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./gateway/src:/home/node/app/src"
+    depends_on:
+      - "customer-svc"
+    networks:
+      - "frontend"
+
+networks:
+  frontend:
+  customer:
