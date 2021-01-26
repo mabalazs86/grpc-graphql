@@ -3,14 +3,34 @@ syntax = "proto3";
 package customer;
 
 service CustomersService {
-  rpc FindOne (CustomerById) returns (Customer) {}
-}
+  rpc GetCustomerById (GetCustomerByIdRequest) returns (GetCustomerByIdResponse) {}
+  rpc GetCustomersByIds (GetCustomersByIdsRequest) returns (GetCustomersByIdsResponse) {}
+  rpc CreateCustomer (CreateCustomerRequest) returns (CreateCustomerResponse) {}
 
-message CustomerById {
-  int32 id = 1;
 }
 
 message Customer {
+  required int32 id = 1;
+  required string name = 2;
+}
+
+message GetCustomerByIdRequest {
   int32 id = 1;
-  string name = 2;
+}
+message GetCustomerByIdResponse {
+  Customer customer = 1;
+}
+
+message GetCustomersByIdsRequest {
+  repeated int32 ids = 1;
+}
+message GetCustomersByIdsResponse {
+  repeated Customer customers = 1;
+}
+
+message CreateCustomerRequest {
+  string name = 1;
+}
+message CreateCustomerResponse {
+  Customer customer = 1;
 }
