@@ -10,8 +10,8 @@ service CustomersService {
 }
 
 message Customer {
-  required int32 id = 1;
-  required string name = 2;
+  int32 id = 1;
+  string name = 2;
 }
 
 message GetCustomerByIdRequest {

@@ -4,16 +4,15 @@
 ## Table of Contents
 
 - [customer.proto](#customer.proto)
+    - [CreateCustomerRequest](#customer.CreateCustomerRequest)
+    - [CreateCustomerResponse](#customer.CreateCustomerResponse)
     - [Customer](#customer.Customer)
-    - [CustomerById](#customer.CustomerById)
+    - [GetCustomerByIdRequest](#customer.GetCustomerByIdRequest)
+    - [GetCustomerByIdResponse](#customer.GetCustomerByIdResponse)
+    - [GetCustomersByIdsRequest](#customer.GetCustomersByIdsRequest)
+    - [GetCustomersByIdsResponse](#customer.GetCustomersByIdsResponse)
   
     - [CustomersService](#customer.CustomersService)
-  
-- [organization.proto](#organization.proto)
-    - [Organization](#organization.Organization)
-    - [OrganizationById](#organization.OrganizationById)
-  
-    - [OrganizationesService](#organization.OrganizationesService)
   
 - [Scalar Value Types](#scalar-value-types)
 
@@ -23,6 +22,36 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## customer.proto
+
+
+
+<a name="customer.CreateCustomerRequest"></a>
+
+### CreateCustomerRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="customer.CreateCustomerResponse"></a>
+
+### CreateCustomerResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| customer | [Customer](#customer.Customer) |  |  |
+
+
+
 
 
 
@@ -42,15 +71,60 @@
 
 
 
-<a name="customer.CustomerById"></a>
+<a name="customer.GetCustomerByIdRequest"></a>
 
-### CustomerById
+### GetCustomerByIdRequest
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | id | [int32](#int32) |  |  |
+
+
+
+
+
+
+<a name="customer.GetCustomerByIdResponse"></a>
+
+### GetCustomerByIdResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| customer | [Customer](#customer.Customer) |  |  |
+
+
+
+
+
+
+<a name="customer.GetCustomersByIdsRequest"></a>
+
+### GetCustomersByIdsRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ids | [int32](#int32) | repeated |  |
+
+
+
+
+
+
+<a name="customer.GetCustomersByIdsResponse"></a>
+
+### GetCustomersByIdsResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| customers | [Customer](#customer.Customer) | repeated |  |
 
 
 
@@ -70,64 +144,9 @@
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| FindOne | [CustomerById](#customer.CustomerById) | [Customer](#customer.Customer) |  |
-
- 
-
-
-
-<a name="organization.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## organization.proto
-
-
-
-<a name="organization.Organization"></a>
-
-### Organization
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| id | [int32](#int32) |  |  |
-| name | [string](#string) |  |  |
-
-
-
-
-
-
-<a name="organization.OrganizationById"></a>
-
-### OrganizationById
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| id | [int32](#int32) |  |  |
-
-
-
-
-
- 
-
- 
-
- 
-
-
-<a name="organization.OrganizationesService"></a>
-
-### OrganizationesService
-
-
-| Method Name | Request Type | Response Type | Description |
-| ----------- | ------------ | ------------- | ------------|
-| FindOne | [OrganizationById](#organization.OrganizationById) | [Organization](#organization.Organization) |  |
+| GetCustomerById | [GetCustomerByIdRequest](#customer.GetCustomerByIdRequest) | [GetCustomerByIdResponse](#customer.GetCustomerByIdResponse) |  |
+| GetCustomersByIds | [GetCustomersByIdsRequest](#customer.GetCustomersByIdsRequest) | [GetCustomersByIdsResponse](#customer.GetCustomersByIdsResponse) |  |
+| CreateCustomer | [CreateCustomerRequest](#customer.CreateCustomerRequest) | [CreateCustomerResponse](#customer.CreateCustomerResponse) |  |
 
  
 

@@ -4,7 +4,7 @@
 node_modules/.bin/tsproto --path ./_proto --output ./_proto --template ../../_proto/grpc-promise-template.hbs
 
 # generate doc from proto files
-# docker run --rm -v $PWD/_doc:/out -v $PWD/_proto:/protos pseudomuto/protoc-gen-doc --doc_opt=markdown,docs.md
+docker run --rm -v $PWD/_doc:/out -v $PWD/_proto:/protos pseudomuto/protoc-gen-doc --doc_opt=markdown,docs.md
 
 # copy the generated ts files to the services
 node_modules/.bin/cpy _proto ./gateway/src/proto
