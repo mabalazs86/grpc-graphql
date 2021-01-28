@@ -1,4 +1,4 @@
-# Install and run the project
+# Install and run the project with docker-compose
 
 ```
 $ yarn
@@ -11,3 +11,14 @@ $ docker-compose -f docker-compose.yml up
 ```
 
 Open graphql playground: http://localhost:3000/graphql
+
+# Install and run the project with kubernetes
+
+```
+$ minikube start --driver=kvm2
+$ eval $(minikube -p minikube docker-env)
+$ docker build -t mabalazs86/grpc-customer-svc:0.0.1 ./microservices/customer
+$ docker build -t mabalazs86/grpc-gateway:0.0.1 ./gateway
+$ kubectl apply -f infra/k8s
+$ minikube service gateway --url
+```

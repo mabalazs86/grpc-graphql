@@ -6,6 +6,7 @@ services:
     container_name: "customer-svc"
     build:
       context: "./microservices/customer"
+      dockerfile: Dockerfile-dev
     expose:
       - "50051"
     volumes:
@@ -22,6 +23,7 @@ services:
     container_name: "gateway"
     build:
       context: "./gateway"
+      dockerfile: Dockerfile-dev
     ports:
       - "3000:3000"
     volumes:

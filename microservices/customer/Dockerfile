@@ -1,10 +1,15 @@
-FROM node:13-alpine
-
+FROM node:13-alpine AS builder
 WORKDIR /home/node/app
-
-COPY . .
+COPY ./package.json ./
 RUN yarn
+COPY . .
+RUN yarn build
+
+
+FROM node:13-alpine-alpine
+WORKDIR /home/node/app
+COPY --from=builder /home/node/app ./
 
 EXPOSE 50051
 
-CMD ["yarn", "start:dev"]
+CMD ["yarn", "start:prod"]

@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-svc # Deployment name
+  labels:
+    app: customer-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-svc
+  template:
+    metadata:
+      labels:
+        app: customer-svc
+    spec:
+      containers:
+        - name: customer-svc
+          image: "mabalazs86/grpc-customer-svc:0.0.1"
+          imagePullPolicy: Never
+          ports:
+            - name: http
+              containerPort: 50051
+              protocol: TCP
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: customer-svc
+  labels:
+    app: customer-svc
+spec:
+  selector:
+    app: customer-svc
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+      protocol: TCP
