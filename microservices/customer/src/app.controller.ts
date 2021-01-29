@@ -3,9 +3,19 @@ import { GrpcMethod } from '@nestjs/microservices';
 import { Metadata } from 'grpc';
 import { Observable, Observer } from 'rxjs';
 import { AppService } from './app.service';
-import { customer } from './proto/customer';
+import {
+  CreateCustomerRequest,
+  CreateCustomerResponse,
+  Customer,
+  CustomersServiceController,
+  CustomersServiceControllerMethods,
+  GetCustomerByIdRequest,
+  GetCustomerByIdResponse,
+  GetCustomersByIdsRequest,
+  GetCustomersByIdsResponse,
+} from './proto/customer';
 
-const customersDatas: customer.Customer[] = [
+const customersDatas: Customer[] = [
   { id: 1, name: 'Peter' },
   { id: 2, name: 'Tom' },
   { id: 3, name: 'John' },
@@ -15,15 +25,14 @@ const customersDatas: customer.Customer[] = [
 ];
 
 @Controller()
-export class AppController implements customer.CustomersService {
+@CustomersServiceControllerMethods()
+export class AppController implements CustomersServiceController {
   constructor(private readonly appService: AppService) {}
-
-  @GrpcMethod('CustomersService')
   getCustomerById(
-    data: customer.GetCustomerByIdRequest,
+    request: GetCustomerByIdRequest,
     metadata?: Metadata,
-  ): Observable<customer.GetCustomerByIdResponse> {
-    const customer = customersDatas.find(({ id }) => id === data.id);
+  ): Observable<GetCustomerByIdResponse> {
+    const customer = customersDatas.find(({ id }) => id === request.id);
     const result = new Observable((observer: Observer<any>) => {
       observer.next({ customer });
 
@@ -32,14 +41,12 @@ export class AppController implements customer.CustomersService {
 
     return result;
   }
-
-  @GrpcMethod('CustomersService')
   getCustomersByIds(
-    data: customer.GetCustomersByIdsRequest,
+    request: GetCustomersByIdsRequest,
     metadata?: Metadata,
-  ): Observable<customer.GetCustomersByIdsResponse> {
+  ): Observable<GetCustomersByIdsResponse> {
     const customers = customersDatas.filter(
-      ({ id }) => data.ids.indexOf(id) !== -1,
+      ({ id }) => request.ids.indexOf(id) !== -1,
     );
     const result = new Observable((observer: Observer<any>) => {
       observer.next({ customers });
@@ -48,16 +55,14 @@ export class AppController implements customer.CustomersService {
     });
     return result;
   }
-
-  @GrpcMethod('CustomersService')
   createCustomer(
-    data: customer.CreateCustomerRequest,
+    request: CreateCustomerRequest,
     metadata?: Metadata,
-  ): Observable<customer.CreateCustomerResponse> {
+  ): Observable<CreateCustomerResponse> {
     const newId = Math.max(...customersDatas.map(({ id }) => id)) + 1;
-    const newCustomer: customer.Customer = {
+    const newCustomer: Customer = {
       id: newId,
-      name: data.name,
+      name: request.name,
     };
     customersDatas.push(newCustomer);
     const result = new Observable((observer: Observer<any>) => {

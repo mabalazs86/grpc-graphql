@@ -6,6 +6,7 @@ import {
 } from '@nestjs/microservices';
 import { CustomerResolver } from './graphql/customer.resolver';
 import { CustomerService } from './customer.service';
+import { CUSTOMER_PACKAGE_NAME } from '../proto/customer';
 
 @Module({
   // imports: [
@@ -32,13 +33,13 @@ import { CustomerService } from './customer.service';
   providers: [
     CustomerResolver,
     {
-      provide: 'CustomerGRPC',
+      provide: CUSTOMER_PACKAGE_NAME,
       useFactory: (): ClientGrpcProxy => {
         return ClientProxyFactory.create({
           transport: Transport.GRPC,
           options: {
             url: 'customer-svc:50051',
-            package: 'customer',
+            package: CUSTOMER_PACKAGE_NAME,
             protoPath: '/home/node/app/src/proto/customer.proto',
             loader: {
               keepCase: true,
@@ -52,6 +53,6 @@ import { CustomerService } from './customer.service';
     },
     CustomerService,
   ],
-  exports: ['CustomerGRPC'],
+  exports: [CUSTOMER_PACKAGE_NAME],
 })
 export class CustomerModule {}
