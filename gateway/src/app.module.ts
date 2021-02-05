@@ -4,6 +4,7 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CustomerModule } from './customer/customer.module';
+import { LoaderProvider } from './loader/loader.prodiver';
 
 @Module({
   imports: [
@@ -32,11 +33,11 @@ import { CustomerModule } from './customer/customer.module';
         //   }
         // ]
       },
-      context: ({ req, res }): any => ({ req, res }),
+      context: ({ req, res }): any => ({ req, res, loaders: {} }),
     }),
     CustomerModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, LoaderProvider],
 })
 export class AppModule {}

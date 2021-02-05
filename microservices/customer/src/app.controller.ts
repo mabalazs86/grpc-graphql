@@ -45,6 +45,8 @@ export class AppController implements CustomersServiceController {
     request: GetCustomersByIdsRequest,
     metadata?: Metadata,
   ): Observable<GetCustomersByIdsResponse> {
+    console.log(request.ids);
+
     const customers = customersDatas.filter(
       ({ id }) => request.ids.indexOf(id) !== -1,
     );

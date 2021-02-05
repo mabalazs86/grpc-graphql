@@ -32,6 +32,7 @@
     "class-transformer": "^0.3.2",
     "class-validator": "^0.13.1",
     "cors": "^2.8.5",
+    "dataloader": "^2.0.0",
     "graphql": "^15.4.0",
     "graphql-tools": "^7.0.2",
     "grpc": "^1.24.4",
