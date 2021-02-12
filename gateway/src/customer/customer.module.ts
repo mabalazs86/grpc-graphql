@@ -5,8 +5,10 @@ import {
   Transport,
 } from '@nestjs/microservices';
 import { CustomerResolver } from './graphql/customer.resolver';
-import { CustomerService } from './customer.service';
 import { CUSTOMER_PACKAGE_NAME } from '../proto/customer';
+import { CustomerLoaders } from './graphql/customer.loader';
+import { CustomerGrpcService } from './customer.grpc.service';
+import { CustomerService } from './customer.service';
 
 @Module({
   // imports: [
@@ -51,7 +53,9 @@ import { CUSTOMER_PACKAGE_NAME } from '../proto/customer';
         });
       },
     },
+    CustomerGrpcService,
     CustomerService,
+    CustomerLoaders,
   ],
   exports: [CUSTOMER_PACKAGE_NAME],
 })

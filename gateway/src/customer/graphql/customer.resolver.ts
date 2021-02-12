@@ -1,8 +1,9 @@
 import { Inject, OnModuleInit, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Query, Resolver, Args, Context, Mutation } from '@nestjs/graphql';
-import { CustomContext } from 'src/CustomContext';
 import { Customer } from 'src/graphql/typings';
+import { CustomerGrpcService } from '../customer.grpc.service';
 import { CustomerService } from '../customer.service';
+import { CustomerLoaders } from './customer.loader';
 import { CreateCustomerInput } from './inputs/create.customer.input';
 
 @Resolver()
@@ -15,11 +16,8 @@ export class CustomerResolver {
   }
 
   @Query()
-  async customers(
-    @Args('ids') ids: number[],
-    @Context() ctx: CustomContext,
-  ): Promise<Customer[]> {
-    return ctx.loaders.CustomerLoaderById.loadMany(ids);
+  async customers(@Args('ids') ids: number[]): Promise<(Customer | Error)[]> {
+    return this.customerService.getCustomers(ids);
   }
 
   @Mutation(() => Customer)
