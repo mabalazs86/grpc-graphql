@@ -5,8 +5,8 @@ import {
   CustomersServiceClient,
   CUSTOMERS_SERVICE_NAME,
   CUSTOMER_PACKAGE_NAME,
-} from 'src/proto/customer';
-import { Customer } from 'src/graphql/typings';
+} from 'src/_generated/proto/customer';
+import { Customer } from 'src/_generated/graphql/typings';
 import { CreateCustomerInput } from './graphql/inputs/create.customer.input';
 
 import { CustomerMapper } from './mappers/customer.mapper';
@@ -20,6 +20,7 @@ export class CustomerGrpcService implements OnModuleInit {
     @Inject(CUSTOMER_PACKAGE_NAME)
     private readonly client: ClientGrpcProxy,
   ) {}
+
   onModuleInit(): void {
     this.customerService = this.client.getService<CustomersServiceClient>(
       CUSTOMERS_SERVICE_NAME,

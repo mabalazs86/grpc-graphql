@@ -1,5 +1,4 @@
 import { Controller, Get } from '@nestjs/common';
-import { GrpcMethod } from '@nestjs/microservices';
 import { Metadata } from 'grpc';
 import { Observable, Observer } from 'rxjs';
 import { AppService } from './app.service';

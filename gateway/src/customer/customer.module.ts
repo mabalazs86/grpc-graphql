@@ -5,10 +5,10 @@ import {
   Transport,
 } from '@nestjs/microservices';
 import { CustomerResolver } from './graphql/customer.resolver';
-import { CUSTOMER_PACKAGE_NAME } from '../proto/customer';
 import { CustomerLoaders } from './graphql/customer.loader';
 import { CustomerGrpcService } from './customer.grpc.service';
 import { CustomerService } from './customer.service';
+import { CUSTOMER_PACKAGE_NAME } from 'src/_generated/proto/customer';
 
 @Module({
   // imports: [
@@ -21,7 +21,7 @@ import { CustomerService } from './customer.service';
   //         url: 'customer-svc:50051',
   //         package: 'customer',
   //         // protoPath: join(__dirname, '../proto/customer.proto'),
-  //         protoPath: '/home/node/app/src/proto/customer.proto',
+  //         protoPath: '/home/node/app/src/generated/proto/customer.proto',
   //         loader: {
   //           keepCase: true,
   //           enums: String,
@@ -42,7 +42,7 @@ import { CustomerService } from './customer.service';
           options: {
             url: 'customer-svc:50051',
             package: CUSTOMER_PACKAGE_NAME,
-            protoPath: '/home/node/app/src/proto/customer.proto',
+            protoPath: '/home/node/app/src/_generated/proto/customer.proto',
             loader: {
               keepCase: true,
               enums: String,

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Customer } from 'src/graphql/typings';
+import { Customer } from 'src/_generated/graphql/typings';
 import { CreateCustomerInput } from './graphql/inputs/create.customer.input';
 
 import { CustomerGrpcService } from './customer.grpc.service';

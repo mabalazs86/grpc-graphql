@@ -1,7 +1,7 @@
 import { Injectable, Scope } from '@nestjs/common';
 import DataLoader from 'dataloader';
 import { CustomerGrpcService } from '../customer.grpc.service';
-import { Customer } from 'src/graphql/typings';
+import { Customer } from 'src/_generated/graphql/typings';
 @Injectable({ scope: Scope.REQUEST })
 export class CustomerLoaders {
   constructor(private readonly customerGrpcService: CustomerGrpcService) {}

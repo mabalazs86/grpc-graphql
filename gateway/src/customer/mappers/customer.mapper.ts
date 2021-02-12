@@ -1,5 +1,5 @@
-import { Customer } from 'src/graphql/typings';
-import * as proto from 'src/proto/customer';
+import { Customer } from 'src/_generated/graphql/typings';
+import * as proto from 'src/_generated/proto/customer';
 
 export class CustomerMapper {
   public toCustomer(customerGrpc: proto.Customer): Customer {

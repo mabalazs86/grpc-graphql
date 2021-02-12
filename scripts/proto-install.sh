@@ -12,6 +12,6 @@ yarn run grpc_tools_node_protoc --plugin="./node_modules/.bin/protoc-gen-ts_prot
 docker run --rm -v $PWD/_doc:/out -v $PWD/_proto:/protos pseudomuto/protoc-gen-doc --doc_opt=markdown,docs.md
 
 # copy the generated ts files to the services
-node_modules/.bin/cpy _proto ./gateway/src/proto
+node_modules/.bin/cpy _proto ./gateway/src/_generated/proto
 node_modules/.bin/cpy _proto ./microservices/customer/src/proto
 # node_modules/.bin/cpy _proto ./microservices/organization/src/proto

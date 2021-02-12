@@ -1,6 +1,6 @@
 import { Length } from 'class-validator';
 import { Field, InputType } from '@nestjs/graphql';
-import { Customer } from 'src/graphql/typings';
+import { Customer } from 'src/_generated/graphql/typings';
 
 @InputType()
 export class CreateCustomerInput extends Customer {
