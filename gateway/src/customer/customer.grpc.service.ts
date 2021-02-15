@@ -27,14 +27,14 @@ export class CustomerGrpcService implements OnModuleInit {
     );
   }
 
-  async getCustomer(id: number): Promise<Customer> {
+  async getCustomer(id: string): Promise<Customer> {
     const result = await this.customerService
       .getCustomerById({ id })
       .toPromise();
     return this.customerMapper.toCustomer(result.customer);
   }
 
-  async getCustomers(ids: number[]): Promise<Customer[]> {
+  async getCustomers(ids: string[]): Promise<Customer[]> {
     const result = await this.customerService
       .getCustomersByIds({ ids })
       .toPromise();

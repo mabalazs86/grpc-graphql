@@ -12,11 +12,11 @@ export class CustomerService {
     private readonly customerLoaders: CustomerLoaders,
   ) {}
 
-  async getCustomer(id: number): Promise<Customer> {
+  async getCustomer(id: string): Promise<Customer> {
     return this.customerLoaders.findById.load(id);
   }
 
-  async getCustomers(ids: number[]): Promise<(Customer | Error)[]> {
+  async getCustomers(ids: string[]): Promise<(Customer | Error)[]> {
     return this.customerLoaders.findById.loadMany(ids);
   }
 

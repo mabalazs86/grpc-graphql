@@ -63,7 +63,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [int32](#int32) |  |  |
+| id | [string](#string) |  |  |
 | name | [string](#string) |  |  |
 
 
@@ -79,7 +79,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [int32](#int32) |  |  |
+| id | [string](#string) |  |  |
 
 
 
@@ -109,7 +109,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ids | [int32](#int32) | repeated |  |
+| ids | [string](#string) | repeated |  |
 
 
 

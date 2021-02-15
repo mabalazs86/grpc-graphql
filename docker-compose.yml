@@ -1,23 +1,6 @@
 version: "3"
 
 services:
-  customer-svc:
-    image: "customer-svc:dev"
-    container_name: "customer-svc"
-    build:
-      context: "./microservices/customer"
-      dockerfile: Dockerfile-dev
-    expose:
-      - "50051"
-    volumes:
-      - "./microservices/customer/src:/home/node/app/src"
-    environment:
-      GRPC_HOST: "0.0.0.0"
-      GRPC_PORT: "50051"
-    networks:
-      - "frontend"
-      - "customer"
-
   gateway:
     image: "gateway:dev"
     container_name: "gateway"
@@ -32,6 +15,57 @@ services:
       - "customer-svc"
     networks:
       - "frontend"
+
+  customer-svc:
+    image: "customer-svc:dev"
+    container_name: "customer-svc"
+    build:
+      context: "./microservices/customer"
+      dockerfile: Dockerfile-dev
+    expose:
+      - "50051"
+    volumes:
+      - "./microservices/customer/src:/home/node/app/src"
+    environment:
+      GRPC_HOST: "0.0.0.0"
+      GRPC_PORT: "50051"
+    depends_on:
+      - customer-db
+    networks:
+      - "frontend"
+      - "customer"
+
+  customer-db:
+    image: postgres
+    container_name: customer_db
+    ports:
+      - 5432:5432
+    restart: always
+    environment:
+      POSTGRES_DB: customer
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      PGDATA: /var/lib/postgresql/data/db-files/
+    # volumes:
+    #   - db-data:/var/lib/postgresql/data
+    networks:
+      - "frontend"
+      - "customer"
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    depends_on:
+      - customer-db
+    ports:
+      - 5050:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: madbazsa@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: madbazsa
+    networks:
+      - "frontend"
+      - "customer"
 
 networks:
   frontend:

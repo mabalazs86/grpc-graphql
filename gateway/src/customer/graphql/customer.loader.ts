@@ -6,7 +6,7 @@ import { Customer } from 'src/_generated/graphql/typings';
 export class CustomerLoaders {
   constructor(private readonly customerGrpcService: CustomerGrpcService) {}
 
-  public readonly findById = new DataLoader<number, Customer>(async ids => {
+  public readonly findById = new DataLoader<string, Customer>(async ids => {
     try {
       //   @ts-ignore: TS4104
       const customers = await this.customerGrpcService.getCustomers(ids);

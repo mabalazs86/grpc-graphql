@@ -9,12 +9,12 @@ export class CustomerResolver {
   constructor(private customerService: CustomerService) {}
 
   @Query()
-  async customer(@Args('id') id: number): Promise<Customer> {
+  async customer(@Args('id') id: string): Promise<Customer> {
     return this.customerService.getCustomer(id);
   }
 
   @Query()
-  async customers(@Args('ids') ids: number[]): Promise<(Customer | Error)[]> {
+  async customers(@Args('ids') ids: string[]): Promise<(Customer | Error)[]> {
     return this.customerService.getCustomers(ids);
   }
 

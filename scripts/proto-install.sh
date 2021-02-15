@@ -5,7 +5,6 @@ yarn run grpc_tools_node_protoc --plugin="./node_modules/.bin/protoc-gen-ts_prot
   --ts_proto_out="./_proto" \
   --ts_proto_opt="nestJs=true" \
   --ts_proto_opt="addGrpcMetadata=true" \
-  --ts_proto_opt="returnObservable=true" \
   ./_proto/*.proto
 
 # generate doc from proto files

@@ -1,5 +1,5 @@
 type Customer {
-  id: Int!
+  id: String!
   name: String!
 }
 
@@ -8,8 +8,8 @@ input CreateCustomerInput {
 }
 
 type Query {
-  customer(id: Int!): Customer
-  customers(ids: [Int!]!): [Customer]
+  customer(id: String!): Customer
+  customers(ids: [String!]!): [Customer]
 }
 
 type Mutation {

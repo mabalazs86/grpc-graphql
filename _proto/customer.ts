@@ -6,12 +6,12 @@ import { Metadata } from "grpc";
 export const protobufPackage = "customer";
 
 export interface Customer {
-  id: number;
+  id: string;
   name: string;
 }
 
 export interface GetCustomerByIdRequest {
-  id: number;
+  id: string;
 }
 
 export interface GetCustomerByIdResponse {
@@ -19,7 +19,7 @@ export interface GetCustomerByIdResponse {
 }
 
 export interface GetCustomersByIdsRequest {
-  ids: number[];
+  ids: string[];
 }
 
 export interface GetCustomersByIdsResponse {
@@ -57,17 +57,26 @@ export interface CustomersServiceController {
   getCustomerById(
     request: GetCustomerByIdRequest,
     metadata?: Metadata
-  ): Observable<GetCustomerByIdResponse>;
+  ):
+    | Promise<GetCustomerByIdResponse>
+    | Observable<GetCustomerByIdResponse>
+    | GetCustomerByIdResponse;
 
   getCustomersByIds(
     request: GetCustomersByIdsRequest,
     metadata?: Metadata
-  ): Observable<GetCustomersByIdsResponse>;
+  ):
+    | Promise<GetCustomersByIdsResponse>
+    | Observable<GetCustomersByIdsResponse>
+    | GetCustomersByIdsResponse;
 
   createCustomer(
     request: CreateCustomerRequest,
     metadata?: Metadata
-  ): Observable<CreateCustomerResponse>;
+  ):
+    | Promise<CreateCustomerResponse>
+    | Observable<CreateCustomerResponse>
+    | CreateCustomerResponse;
 }
 
 export function CustomersServiceControllerMethods() {

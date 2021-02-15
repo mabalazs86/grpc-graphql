@@ -10,19 +10,19 @@ service CustomersService {
 }
 
 message Customer {
-  int32 id = 1;
+  string id = 1;
   string name = 2;
 }
 
 message GetCustomerByIdRequest {
-  int32 id = 1;
+  string id = 1;
 }
 message GetCustomerByIdResponse {
   Customer customer = 1;
 }
 
 message GetCustomersByIdsRequest {
-  repeated int32 ids = 1;
+  repeated string ids = 1;
 }
 message GetCustomersByIdsResponse {
   repeated Customer customers = 1;
