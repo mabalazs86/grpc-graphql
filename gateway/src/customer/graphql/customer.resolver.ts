@@ -1,7 +1,9 @@
 import { Inject, OnModuleInit, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Query, Resolver, Args, Context, Mutation } from '@nestjs/graphql';
-import { Customer } from 'src/_generated/graphql/typings';
+import ConnectionArgs from 'src/common/pagination/connection.args';
+import { Customer, GetCustomersInput } from 'src/_generated/graphql/typings';
 import { CustomerService } from '../customer.service';
+import CustomerPaginationResponse from './CustomerPaginationResponse';
 import { CreateCustomerInput } from './inputs/create.customer.input';
 
 @Resolver()
@@ -14,8 +16,11 @@ export class CustomerResolver {
   }
 
   @Query()
-  async customers(@Args('ids') ids: string[]): Promise<(Customer | Error)[]> {
-    return this.customerService.getCustomers(ids);
+  async customers(
+    @Args('input') input: GetCustomersInput,
+    @Args('pagination') pagination: ConnectionArgs,
+  ): Promise<CustomerPaginationResponse> {
+    return this.customerService.getCustomers(input, pagination);
   }
 
   @Mutation(() => Customer)

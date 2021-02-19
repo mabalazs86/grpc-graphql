@@ -1,17 +1,58 @@
 type Customer {
   id: String!
   name: String!
+  isRegistered: Boolean
 }
 
 input CreateCustomerInput {
   name: String!
 }
 
+input GetCustomersInput {
+  ids: [String!]
+  isRegistered: Boolean
+}
+
 type Query {
   customer(id: String!): Customer
-  customers(ids: [String!]!): [Customer]
+  customers(
+    input: GetCustomersInput
+    pagination: PaginationInput
+  ): CustomerResponse
 }
 
 type Mutation {
   createCustomer(input: CreateCustomerInput!): Customer
+}
+
+type CustomerConnection {
+  edges: [CustomerEdge!]
+  pageInfo: PageInfo
+}
+type CustomerEdge {
+  cursor: String
+  node: Customer
+}
+type CustomerResponse {
+  page: CustomerConnection!
+  pageData: PageData
+}
+
+# Pagination
+type PageData {
+  count: Float!
+  limit: Float!
+  offset: Float!
+}
+type PageInfo {
+  startCursor: String
+  endCursor: String
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+}
+input PaginationInput {
+  before: String
+  after: String
+  first: Float
+  last: Float
 }

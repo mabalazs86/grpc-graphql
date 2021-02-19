@@ -6,7 +6,7 @@ COPY . .
 RUN yarn build
 
 
-FROM node:13-alpine-alpine
+FROM node:13-alpine
 WORKDIR /home/node/app
 COPY --from=builder /home/node/app ./
 

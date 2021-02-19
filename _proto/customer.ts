@@ -8,6 +8,7 @@ export const protobufPackage = "customer";
 export interface Customer {
   id: string;
   name: string;
+  isRegistered: boolean;
 }
 
 export interface GetCustomerByIdRequest {
@@ -24,6 +25,17 @@ export interface GetCustomersByIdsRequest {
 
 export interface GetCustomersByIdsResponse {
   customers: Customer[];
+}
+
+export interface GetCustomerIdsByIsRegisteredRequest {
+  isRegistered: boolean;
+  offset: number;
+  limit: number;
+}
+
+export interface GetCustomerIdsByIsRegisteredResponse {
+  ids: string[];
+  count: number;
 }
 
 export interface CreateCustomerRequest {
@@ -51,6 +63,11 @@ export interface CustomersServiceClient {
     request: CreateCustomerRequest,
     metadata?: Metadata
   ): Observable<CreateCustomerResponse>;
+
+  getCustomerIdsByIsRegistered(
+    request: GetCustomerIdsByIsRegisteredRequest,
+    metadata?: Metadata
+  ): Observable<GetCustomerIdsByIsRegisteredResponse>;
 }
 
 export interface CustomersServiceController {
@@ -77,6 +94,14 @@ export interface CustomersServiceController {
     | Promise<CreateCustomerResponse>
     | Observable<CreateCustomerResponse>
     | CreateCustomerResponse;
+
+  getCustomerIdsByIsRegistered(
+    request: GetCustomerIdsByIsRegisteredRequest,
+    metadata?: Metadata
+  ):
+    | Promise<GetCustomerIdsByIsRegisteredResponse>
+    | Observable<GetCustomerIdsByIsRegisteredResponse>
+    | GetCustomerIdsByIsRegisteredResponse;
 }
 
 export function CustomersServiceControllerMethods() {
@@ -85,6 +110,7 @@ export function CustomersServiceControllerMethods() {
       "getCustomerById",
       "getCustomersByIds",
       "createCustomer",
+      "getCustomerIdsByIsRegistered",
     ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(

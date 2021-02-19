@@ -40,7 +40,16 @@ export class CustomerGrpcService implements OnModuleInit {
       .toPromise();
     return this.customerMapper.toCustomers(result.customers);
   }
-
+  async getCustomerIdsByIsRegistered(
+    isRegistered: boolean,
+    offset: number = 0,
+    limit: number = 20,
+  ): Promise<{ ids: string[]; count: number }> {
+    const result = await this.customerService
+      .getCustomerIdsByIsRegistered({ isRegistered, limit, offset })
+      .toPromise();
+    return result;
+  }
   async createCustomer(customer: CreateCustomerInput): Promise<Customer> {
     const input = this.customerMapper.toCreateCustomerRequest(customer);
     const result = await this.customerService.createCustomer(input).toPromise();

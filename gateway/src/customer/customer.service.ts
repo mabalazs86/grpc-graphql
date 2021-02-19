@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { Customer } from 'src/_generated/graphql/typings';
+import { Customer, GetCustomersInput } from 'src/_generated/graphql/typings';
 import { CreateCustomerInput } from './graphql/inputs/create.customer.input';
 
 import { CustomerGrpcService } from './customer.grpc.service';
 import { CustomerLoaders } from './graphql/customer.loader';
+import ConnectionArgs from 'src/common/pagination/connection.args';
+import CustomerPaginationResponse from './graphql/CustomerPaginationResponse';
 
 @Injectable()
 export class CustomerService {
@@ -13,11 +15,15 @@ export class CustomerService {
   ) {}
 
   async getCustomer(id: string): Promise<Customer> {
-    return this.customerLoaders.findById.load(id);
+    return this.customerLoaders.loadById.load(id);
   }
 
-  async getCustomers(ids: string[]): Promise<(Customer | Error)[]> {
-    return this.customerLoaders.findById.loadMany(ids);
+  async getCustomers(
+    input: GetCustomersInput,
+    pagination: ConnectionArgs,
+  ): Promise<CustomerPaginationResponse> {
+    return this.customerLoaders.loadFilteredCustomers(input, pagination);
+    // return this.customerLoaders.findById.loadMany(ids);
   }
 
   async createCustomer(customer: CreateCustomerInput): Promise<Customer> {

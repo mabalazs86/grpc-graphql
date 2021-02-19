@@ -5,6 +5,7 @@ export class CustomerMapper {
   public toCustomer(customerGrpc: proto.Customer): Customer {
     const customerGql: Customer = new Customer();
     customerGql.id = customerGrpc.id;
+    customerGql.isRegistered = customerGrpc.isRegistered;
     customerGql.name = customerGrpc.name.toUpperCase();
     return customerGql;
   }

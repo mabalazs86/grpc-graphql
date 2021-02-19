@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import {
   ExpressAdapter,
@@ -7,8 +8,6 @@ import cors from 'cors';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  // const app = await NestFactory.create(AppModule);
-  // await app.listen(3000);
   const app: NestExpressApplication = await NestFactory.create<
     NestExpressApplication
   >(AppModule, new ExpressAdapter());
@@ -16,6 +15,14 @@ async function bootstrap() {
     cors({
       origin: '*',
       credentials: true,
+    }),
+  );
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
     }),
   );
   return app.listenAsync(3000);

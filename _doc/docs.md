@@ -9,6 +9,8 @@
     - [Customer](#customer.Customer)
     - [GetCustomerByIdRequest](#customer.GetCustomerByIdRequest)
     - [GetCustomerByIdResponse](#customer.GetCustomerByIdResponse)
+    - [GetCustomerIdsByIsRegisteredRequest](#customer.GetCustomerIdsByIsRegisteredRequest)
+    - [GetCustomerIdsByIsRegisteredResponse](#customer.GetCustomerIdsByIsRegisteredResponse)
     - [GetCustomersByIdsRequest](#customer.GetCustomersByIdsRequest)
     - [GetCustomersByIdsResponse](#customer.GetCustomersByIdsResponse)
   
@@ -65,6 +67,7 @@
 | ----- | ---- | ----- | ----------- |
 | id | [string](#string) |  |  |
 | name | [string](#string) |  |  |
+| isRegistered | [bool](#bool) |  |  |
 
 
 
@@ -95,6 +98,39 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | customer | [Customer](#customer.Customer) |  |  |
+
+
+
+
+
+
+<a name="customer.GetCustomerIdsByIsRegisteredRequest"></a>
+
+### GetCustomerIdsByIsRegisteredRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| isRegistered | [bool](#bool) |  |  |
+| offset | [int32](#int32) |  |  |
+| limit | [int32](#int32) |  |  |
+
+
+
+
+
+
+<a name="customer.GetCustomerIdsByIsRegisteredResponse"></a>
+
+### GetCustomerIdsByIsRegisteredResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ids | [string](#string) | repeated |  |
+| count | [int32](#int32) |  |  |
 
 
 
@@ -147,6 +183,7 @@
 | GetCustomerById | [GetCustomerByIdRequest](#customer.GetCustomerByIdRequest) | [GetCustomerByIdResponse](#customer.GetCustomerByIdResponse) |  |
 | GetCustomersByIds | [GetCustomersByIdsRequest](#customer.GetCustomersByIdsRequest) | [GetCustomersByIdsResponse](#customer.GetCustomersByIdsResponse) |  |
 | CreateCustomer | [CreateCustomerRequest](#customer.CreateCustomerRequest) | [CreateCustomerResponse](#customer.CreateCustomerResponse) |  |
+| GetCustomerIdsByIsRegistered | [GetCustomerIdsByIsRegisteredRequest](#customer.GetCustomerIdsByIsRegisteredRequest) | [GetCustomerIdsByIsRegisteredResponse](#customer.GetCustomerIdsByIsRegisteredResponse) |  |
 
  
 
