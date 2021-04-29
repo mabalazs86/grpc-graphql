@@ -4,6 +4,8 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CustomerModule } from './customer/customer.module';
+import { createCustomerMutation } from './customer/graphql/playground/create.customer.mutation';
+import { customersQuery } from './customer/graphql/playground/customers.query';
 
 @Module({
   imports: [
@@ -24,13 +26,18 @@ import { CustomerModule } from './customer/customer.module';
         settings: {
           'request.credentials': 'include',
         },
-        // tabs: [
-        //   {
-        //     name: 'GraphQL API',
-        //     endpoint: '/',
-        //     query: playgroundQuery
-        //   }
-        // ]
+        tabs: [
+          {
+            name: 'Customers Query',
+            endpoint: '/',
+            query: customersQuery,
+          },
+          {
+            name: 'Create Customer',
+            endpoint: '/',
+            query: createCustomerMutation,
+          },
+        ],
       },
       context: ({ req, res }): any => ({ req, res, loaders: {} }),
     }),

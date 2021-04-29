@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package customer;
+
+service CustomersService {
+  rpc GetCustomerById (GetCustomerByIdRequest) returns (GetCustomerByIdResponse) {}
+  rpc GetCustomersByIds (GetCustomersByIdsRequest) returns (GetCustomersByIdsResponse) {}
+  rpc CreateCustomer (CreateCustomerRequest) returns (CreateCustomerResponse) {}
+  rpc GetCustomerIdsByIsRegistered (GetCustomerIdsByIsRegisteredRequest) returns (GetCustomerIdsByIsRegisteredResponse) {}
+}
+
+message Customer {
+  string id = 1;
+  string name = 2;
+  bool isRegistered = 3;
+}
+
+message GetCustomerByIdRequest {
+  string id = 1;
+}
+message GetCustomerByIdResponse {
+  Customer customer = 1;
+}
+
+message GetCustomersByIdsRequest {
+  repeated string ids = 1;
+}
+message GetCustomersByIdsResponse {
+  repeated Customer customers = 1;
+}
+
+message GetCustomerIdsByIsRegisteredRequest {
+  bool isRegistered = 1;
+  int32 offset = 2;
+  int32 limit = 3;
+}
+message GetCustomerIdsByIsRegisteredResponse {
+  repeated string ids = 1;
+  int32 count = 2;
+}
+
+message CreateCustomerRequest {
+  string name = 1;
+}
+message CreateCustomerResponse {
+  Customer customer = 1;
+}

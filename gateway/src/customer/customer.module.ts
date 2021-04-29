@@ -42,7 +42,8 @@ import { CUSTOMER_PACKAGE_NAME } from 'src/_generated/proto/customer';
           options: {
             url: 'customer-svc:50051',
             package: CUSTOMER_PACKAGE_NAME,
-            protoPath: '/home/node/app/src/_generated/proto/customer.proto',
+            protoPath: `${process.env.PROTO_DIR}/customer.proto`,
+            // protoPath: '/home/node/app/src/_generated/proto/customer.proto',
             loader: {
               keepCase: true,
               enums: String,

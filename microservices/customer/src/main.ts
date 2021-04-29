@@ -11,8 +11,8 @@ async function bootstrap() {
     options: {
       url: `${process.env.GRPC_HOST}:${process.env.GRPC_PORT}`,
       package: CUSTOMER_PACKAGE_NAME,
-      // protoPath: join(__dirname, 'proto/customer.proto'),
-      protoPath: '/home/node/app/src/proto/customer.proto',
+      protoPath: `${process.env.PROTO_DIR}/customer.proto`,
+      // protoPath: '/home/node/app/src/proto/customer.proto',
       loader: {
         keepCase: true,
         enums: String,

@@ -23,6 +23,9 @@ spec:
             - name: http
               containerPort: 3000
               protocol: TCP
+          env:
+            - name: PROTO_DIR
+              value: /home/node/app/dist/_generated/proto
 ---
 kind: Service
 apiVersion: v1

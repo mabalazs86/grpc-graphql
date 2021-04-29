@@ -11,6 +11,8 @@ services:
       - "3000:3000"
     volumes:
       - "./gateway/src:/home/node/app/src"
+    environment:
+      PROTO_DIR: /home/node/app/src/_generated/proto
     depends_on:
       - "customer-svc"
     networks:
@@ -29,6 +31,7 @@ services:
     environment:
       GRPC_HOST: "0.0.0.0"
       GRPC_PORT: "50051"
+      PROTO_DIR: /home/node/app/src/proto
     depends_on:
       - customer-db
     networks:

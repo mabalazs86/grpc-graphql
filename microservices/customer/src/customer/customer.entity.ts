@@ -8,6 +8,6 @@ export class Customer extends BaseEntity {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ type: 'boolean', default: false })
   isRegistered: boolean;
 }
